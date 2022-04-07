@@ -9,10 +9,17 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    FileIO.cpp \
     main.cpp \
+    old_main.cpp \
+    task.cpp \
+    task_sorting.cpp \
     tasker.cpp
 
 HEADERS += \
+    FileIO.h \
+    task.h \
+    task_sorting.h \
     tasker.h
 
 FORMS += \
