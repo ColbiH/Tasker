@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int main() {
+int old_main() {
 	vector<task> tasks = Open_File();
 	task taskObj;
 
@@ -46,10 +46,10 @@ int main1() {
 	tasks.push_back(t7);
 	tasks.push_back(t8);
 
-	vector<task> sorted = task_sort(tasks, date);
-	for (unsigned int i = 0; i < sorted.size(); i++) {
-		cout << sorted[i].get_duedate() << endl;
-	}
+    //vector<task> sorted = task_sort(tasks, date);
+    //for (unsigned int i = 0; i < sorted.size(); i++) {
+    //	cout << sorted[i].get_duedate() << endl;
+    //}
 
 	return 0;
 }
