@@ -59,14 +59,22 @@ void Tasker::on_checkBox_stateChanged(int arg1)
 
 void Tasker::on_pushButton_clicked()
 {
-    QList<QString> test;
-    test.append("Task Name");
-    test.append("Desc");
-    test.append("Date");
-    test.append("Weight");
 
-    model->append(test);
-    model->reset();
+    vector<task> tasks = Open_File();
+    for (int i = 0; i < tasks.size(); i++) {
+        QString name = QString::fromStdString(tasks.at(i).get_name());
+        QString desc = QString::fromStdString(tasks.at(i).get_description());
+        QString duedate = QString::fromStdString(tasks.at(i).get_duedate());
+
+        QList<QString> test;
+        test.append(name);
+        test.append(desc);
+        test.append(duedate);
+        test.append("To Be Added");
+        model->append(test);
+        model->reset();
+    }
+
 }
 
 
