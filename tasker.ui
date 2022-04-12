@@ -636,6 +636,7 @@
     <addaction name="actionSave_Tasks"/>
     <addaction name="actionExit_And_Save"/>
     <addaction name="actionExit_Without_Saving"/>
+
    </widget>
    <widget class="QMenu" name="menuImport">
     <property name="title">
@@ -647,6 +648,7 @@
    <addaction name="menuImport"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+
   <action name="actionSave_Tasks">
    <property name="text">
     <string>Save Tasks</string>

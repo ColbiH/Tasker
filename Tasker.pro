@@ -14,13 +14,15 @@ SOURCES += \
     old_main.cpp \
     task.cpp \
     task_sorting.cpp \
-    tasker.cpp
+    tasker.cpp \
+    usermodel.cpp
 
 HEADERS += \
     FileIO.h \
     task.h \
     task_sorting.h \
-    tasker.h
+    tasker.h \
+    usermodel.h
 
 FORMS += \
     tasker.ui
@@ -30,4 +32,6 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    Resources/tasks.tsk
+
