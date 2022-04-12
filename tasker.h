@@ -35,6 +35,10 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_actionImport_ics_File_triggered();
+
+    void on_addTask_clicked();
+
 private:
     Ui::Tasker *ui;
 

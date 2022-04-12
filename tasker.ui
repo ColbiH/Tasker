@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -280,7 +280,7 @@
      <attribute name="title">
       <string>Create New Task</string>
      </attribute>
-     <widget class="QLineEdit" name="lineEdit_7">
+     <widget class="QLineEdit" name="newName">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -344,7 +344,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_8">
+     <widget class="QLineEdit" name="newDueDate">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -406,21 +406,6 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QPlainTextEdit" name="plainTextEdit_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>180</y>
-        <width>351</width>
-        <height>211</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
       </property>
      </widget>
      <widget class="QLabel" name="label_19">
@@ -495,7 +480,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="addTask">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -537,17 +522,17 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <widget class="QTextEdit" name="newDesc">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>190</y>
+        <width>371</width>
+        <height>201</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
-   </widget>
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>90</y>
-      <width>391</width>
-      <height>471</height>
-     </rect>
-    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -578,10 +563,20 @@
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>50</y>
-      <width>391</width>
+      <width>371</width>
       <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListView" name="listView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>371</width>
+      <height>471</height>
      </rect>
     </property>
    </widget>
