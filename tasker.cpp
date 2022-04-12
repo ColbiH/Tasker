@@ -1,11 +1,17 @@
 #include "tasker.h"
 #include "ui_tasker.h"
+//#include <QPixmap>
 
 Tasker::Tasker(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Tasker)
 {
     ui->setupUi(this);
+    /*This is for the tasker logo, not sure how to write the file path so that
+     * it's not a local path*/
+
+    //QPixmap pix("C:/Users/jorda/OneDrive/Documents/GitHub/Tasker/Tasker_logo.png");
+    //ui->label_logo->setPixmap(pix);
 }
 
 Tasker::~Tasker()
