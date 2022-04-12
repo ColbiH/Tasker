@@ -23,8 +23,6 @@ public:
 private slots:
     void on_checkBox_stateChanged(int arg1);
 
-    void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
 
     void on_pushButton_5_clicked();

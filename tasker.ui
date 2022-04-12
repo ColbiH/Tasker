@@ -41,7 +41,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
         <bold>false</bold>
        </font>
@@ -53,7 +52,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pButton">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -64,7 +63,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>14</pointsize>
         <bold>true</bold>
         <underline>true</underline>
@@ -85,7 +83,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
        </font>
       </property>
@@ -107,7 +104,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
        </font>
       </property>
@@ -129,7 +125,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -148,7 +143,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -167,7 +161,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -195,47 +188,6 @@
        <string>SUBMIT CHANGES</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>70</y>
-        <width>211</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Bahnschrift</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>110</y>
-        <width>211</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Bahnschrift</family>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_4">
       <property name="geometry">
        <rect>
@@ -247,7 +199,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>16</pointsize>
        </font>
       </property>
@@ -266,7 +217,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>16</pointsize>
        </font>
       </property>
@@ -285,7 +235,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>20</pointsize>
        </font>
       </property>
@@ -296,7 +245,27 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QTextEdit" name="textEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>70</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>110</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_3">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -304,12 +273,6 @@
         <width>351</width>
         <height>211</height>
        </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Bahnschrift</family>
-        <pointsize>16</pointsize>
-       </font>
       </property>
      </widget>
     </widget>
@@ -349,7 +312,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
         <bold>false</bold>
        </font>
@@ -372,7 +334,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
        </font>
       </property>
@@ -436,7 +397,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
         <bold>false</bold>
        </font>
@@ -474,7 +434,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -493,7 +452,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -548,7 +506,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>18</pointsize>
         <bold>false</bold>
         <underline>false</underline>
@@ -569,7 +526,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Bahnschrift</family>
         <pointsize>22</pointsize>
         <bold>false</bold>
        </font>
@@ -587,9 +543,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>30</y>
+      <y>90</y>
       <width>391</width>
-      <height>531</height>
+      <height>471</height>
      </rect>
     </property>
    </widget>
@@ -619,6 +575,16 @@
      <string>Logo Here</string>
     </property>
    </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>391</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -626,7 +592,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -636,7 +602,6 @@
     <addaction name="actionSave_Tasks"/>
     <addaction name="actionExit_And_Save"/>
     <addaction name="actionExit_Without_Saving"/>
-
    </widget>
    <widget class="QMenu" name="menuImport">
     <property name="title">
@@ -648,7 +613,6 @@
    <addaction name="menuImport"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-
   <action name="actionSave_Tasks">
    <property name="text">
     <string>Save Tasks</string>

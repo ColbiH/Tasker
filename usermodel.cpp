@@ -1,5 +1,4 @@
 #include "usermodel.h"
-#include "user.h"
 
 UserModel::UserModel(int nCol, QObject *parent)
     :_nCol(nCol), QAbstractItemModel(parent)
