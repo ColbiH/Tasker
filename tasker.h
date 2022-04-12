@@ -1,7 +1,12 @@
 #ifndef TASKER_H
 #define TASKER_H
 
+#include <QtCore>
+#include <QtGui>
+#include <QDialog>
 #include <QMainWindow>
+#include <QStandardItemModel>
+#include "usermodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Tasker; }
@@ -16,6 +21,17 @@ public:
     ~Tasker();
 
 private:
+    void initModel();
+
+private slots:
+    void on_pushButton_clicked();
+
+    void on_comboBox_currentIndexChanged(int index);
+
+private:
     Ui::Tasker *ui;
+
+    UserModel* model;
+
 };
 #endif // TASKER_H
