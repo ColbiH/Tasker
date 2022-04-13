@@ -39,6 +39,31 @@ Tasker::~Tasker()
     delete ui;
 }
 
+task to_task(QList<QString> q_task){
+    task holder;
+    holder.set_name(q_task[0].toStdString());
+    holder.set_description(q_task[1].toStdString());
+    holder.set_duedate(q_task[2].toStdString());
+    holder.set_course(q_task[3].toStdString());
+    holder.set_weight(stoi(q_task[4].toStdString()));
+    holder.set_diff(stoi(q_task[5].toStdString()));
+    holder.set_complete(stoi(q_task[6].toStdString()));
+    return holder;
+}
+
+
+QList<QString> from_task(task _task){
+    QList<QString> holder;
+
+    holder.append(QString::fromStdString(_task.get_name()));
+    holder.append(QString::fromStdString(_task.get_description()));
+    holder.append(QString::fromStdString(_task.get_duedate()));
+    holder.append(QString::fromStdString(_task.get_course()));
+    holder.append(QString::fromStdString(to_string(_task.get_weight())));
+    holder.append(QString::fromStdString(to_string(_task.get_diff())));
+    holder.append(QString::fromStdString(to_string(_task.get_complete())));
+    return holder;
+}
 
 void Tasker::initModel()
 {

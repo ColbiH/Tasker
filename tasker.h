@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include "usermodel.h"
+#include "task.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Tasker; }
@@ -19,6 +20,8 @@ class Tasker : public QMainWindow
 public:
     Tasker(QWidget *parent = nullptr);
     ~Tasker();
+    task to_task(QList<QString> q_task);
+    QList<QString> from_task(task _task);
 
 private slots:
     void on_checkBox_stateChanged(int arg1);
