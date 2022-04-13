@@ -3,10 +3,12 @@
 
 #include "task.h"
 #include "FileIO.h"
+#include <iostream>
 
 
 #include <QTableView>
 #include <usermodel.h>
+#include <QMessageBox>
 
 
 int currentTask = 0;
@@ -138,16 +140,44 @@ void Tasker::on_addTask_clicked()
     QString course = ui->newCourse->text();
     QString weight = ui->newWeight->text();
     QString diff = ui->newDifficulty->text();
-    QList<QString> addTask;
-    addTask.append(name);
-    addTask.append(desc);
-    addTask.append(duedate);
-    addTask.append(course);
-    addTask.append(weight);
-    addTask.append(diff);
-    addTask.append("0");
-    model->append(addTask);
-    model->reset();
+    string weightTemp = weight.toStdString();
+    bool weightValid = all_of(weightTemp.begin(), weightTemp.end(), ::isdigit);
+    string diffTemp = diff.toStdString();
+    bool diffValid = all_of(diffTemp.begin(), diffTemp.end(), ::isdigit);
+    if (!weightValid && !diffValid){
+        QMessageBox *msgBox = new QMessageBox(this);
+            msgBox->setText("Invalid Input");
+            msgBox->setWindowModality(Qt::NonModal);
+            msgBox->setInformativeText("The difficulty and weight fields must contain a positive integer");
+            int ret = msgBox->exec();
+    }
+    else if (!weightValid){
+        QMessageBox *msgBox = new QMessageBox(this);
+            msgBox->setText("Invalid Input");
+            msgBox->setWindowModality(Qt::NonModal);
+            msgBox->setInformativeText("The weight field must contain a positive integer");
+            int ret = msgBox->exec();
+    }
+    else if (!diffValid){
+        QMessageBox *msgBox = new QMessageBox(this);
+            msgBox->setText("Invalid Input");
+            msgBox->setWindowModality(Qt::NonModal);
+            msgBox->setInformativeText("The difficulty field must contain a positive integer");
+            int ret = msgBox->exec();
+    }
+    else{
+        QList<QString> addTask;
+        addTask.append(name);
+        addTask.append(desc);
+        addTask.append(duedate);
+        addTask.append(course);
+        addTask.append(weight);
+        addTask.append(diff);
+        addTask.append("0");
+        model->append(addTask);
+        model->reset();
+    }
+
 }
 
 

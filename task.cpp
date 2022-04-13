@@ -49,6 +49,15 @@ string task::get_description() {
 	return description;
 }
 
+void task::print() {
+    cout << "Name: " << this->name << ", ";
+    cout << "Weight: " << this->weight << ", ";
+    cout << "Diff: " << this->difficulty << endl;
+    cout << "Course: " << this->course << endl;
+    cout << "Due date: " << this->duedate << endl;
+    cout << "Description: " << this->description << endl;
+}
+
 /*------------------------------------------ Setters -----------------------------------------*/
 void task::set_valid(bool _valid) {
 	valid = _valid;

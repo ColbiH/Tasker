@@ -25,6 +25,7 @@ public:
 	string get_course();
 	string get_name();
 	string get_description();
+    void print();
 
 	/*------------------------------------------ Setters -----------------------------------------*/
 	void set_valid(bool _valid);
