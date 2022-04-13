@@ -86,3 +86,7 @@ QString UserModel::getData(int row, int col)
 {
     return mDatas[row][col];
 }
+
+QList<QString> UserModel::getLine(int row){
+    return mDatas[row];
+}

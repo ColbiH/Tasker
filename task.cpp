@@ -81,15 +81,3 @@ void task::set_name(string _name) {
 void task::set_description(string _description) {
 	description = _description;
 }
-void task::add_Task(vector<task>& tasks, task added_task) {
-	tasks.push_back(added_task);
-}
-void task::delete_Task(vector<task>& tasks, task deleted_task) {
-	int i = 0;
-	for (vector<task>::iterator it = tasks.begin(); it != tasks.end(); it++) {
-		if (it->get_name() == deleted_task.get_name()) {
-			tasks.erase(it);
-			break;
-		}
-	}
-}

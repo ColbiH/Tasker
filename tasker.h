@@ -20,8 +20,7 @@ class Tasker : public QMainWindow
 public:
     Tasker(QWidget *parent = nullptr);
     ~Tasker();
-    task to_task(QList<QString> q_task);
-    QList<QString> from_task(task _task);
+
 
 private slots:
     void on_checkBox_stateChanged(int arg1);
@@ -30,6 +29,8 @@ private slots:
 
 private:
     void initModel();
+    task to_task(QList<QString> q_task);
+    QList<QString> from_task(task _task);
 
 private slots:
     void on_pushButton_clicked();
@@ -43,6 +44,8 @@ private slots:
     void on_deleteTask_clicked();
 
     void on_submitChanges_clicked();
+
+    void on_actionSave_Tasks_triggered();
 
 private:
     Ui::Tasker *ui;

@@ -29,6 +29,7 @@ public:
     void reset();
 
     QString getData(int row, int col);
+    QList<QString> getLine(int row);
 private:
 
     int _nCol;

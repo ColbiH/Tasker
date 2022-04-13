@@ -39,7 +39,7 @@ Tasker::~Tasker()
     delete ui;
 }
 
-task to_task(QList<QString> q_task){
+task Tasker::to_task(QList<QString> q_task){
     task holder;
     holder.set_name(q_task[0].toStdString());
     holder.set_description(q_task[1].toStdString());
@@ -52,7 +52,7 @@ task to_task(QList<QString> q_task){
 }
 
 
-QList<QString> from_task(task _task){
+QList<QString> Tasker::from_task(task _task){
     QList<QString> holder;
 
     holder.append(QString::fromStdString(_task.get_name()));
@@ -73,25 +73,10 @@ void Tasker::initModel()
     vector<task> tasks = Open_File();
     for (int i = 0; i < tasks.size(); i++) {
 
-        QString name = QString::fromStdString(tasks.at(i).get_name());
-        QString desc = QString::fromStdString(tasks.at(i).get_description());
-        QString duedate = QString::fromStdString(tasks.at(i).get_duedate());
-        QString course = QString::fromStdString(tasks.at(i).get_course());
-        QString weight = QString::fromStdString(to_string(tasks.at(i).get_weight()));
-        QString diff = QString::fromStdString(to_string(tasks.at(i).get_diff()));
-        QString complete = QString::fromStdString(to_string((int)tasks.at(i).get_complete()));
+            QList<QString> test = from_task(tasks.at(i));
 
-        QList<QString> test;
-        test.append(name);
-        test.append(desc);
-        test.append(duedate);
-        test.append(course);
-        test.append(weight);
-        test.append(diff);
-        test.append(complete);
-
-        model->append(test);
-        model->reset();
+            model->append(test);
+            model->reset();
     }
 
     //For List View!!
@@ -222,5 +207,16 @@ void Tasker::on_submitChanges_clicked()
         ui->showDifficulty->clear();
         ui->checkBox->setChecked(false);
     }
+}
+
+
+void Tasker::on_actionSave_Tasks_triggered()
+{
+    vector<task> outTasks;
+    for (unsigned int i = 0; i < model->rowCount(); i++){
+        outTasks.push_back(to_task(model->getLine(i)));
+    }
+
+    Write_File(outTasks);
 }
 

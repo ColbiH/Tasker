@@ -7,7 +7,7 @@
 #include "FileIO.h"
 
 using namespace std;
-
+/*
 int old_main() {
 	vector<task> tasks = Open_File();
 	task taskObj;
@@ -53,3 +53,4 @@ int main1() {
 
 	return 0;
 }
+*/
