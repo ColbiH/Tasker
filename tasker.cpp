@@ -42,7 +42,7 @@ Tasker::~Tasker()
 
 void Tasker::initModel()
 {
-    model = new UserModel(4);
+    model = new UserModel(7);
 
 
     vector<task> tasks = Open_File();
@@ -51,12 +51,19 @@ void Tasker::initModel()
         QString name = QString::fromStdString(tasks.at(i).get_name());
         QString desc = QString::fromStdString(tasks.at(i).get_description());
         QString duedate = QString::fromStdString(tasks.at(i).get_duedate());
+        QString course = QString::fromStdString(tasks.at(i).get_course());
+        QString weight = QString::fromStdString(to_string(tasks.at(i).get_weight()));
+        QString diff = QString::fromStdString(to_string(tasks.at(i).get_diff()));
+        QString complete = QString::fromStdString(to_string((int)tasks.at(i).get_complete()));
 
         QList<QString> test;
         test.append(name);
         test.append(desc);
         test.append(duedate);
-        test.append("To Be Added");
+        test.append(course);
+        test.append(weight);
+        test.append(diff);
+        test.append(complete);
 
         model->append(test);
         model->reset();
@@ -92,6 +99,10 @@ void Tasker::on_comboBox_currentIndexChanged(int index)
     ui->showDesc->setText(model->getData(index, 1));
     ui->showDueDate->setText(model->getData(index, 2));
     ui->showCourseName->setText(model->getData(index, 3));
+    ui->showWeight->setText(model->getData(index, 4));
+    ui->showDifficulty->setText(model->getData(index, 5));
+    bool checked = QVariant(model->getData(index, 6)).toBool();
+    ui->checkBox->setChecked(checked);
 
     //Old Delete Task Button
 }
@@ -120,11 +131,17 @@ void Tasker::on_addTask_clicked()
     QString name = ui->newName->text();
     QString desc = ui->newDesc->toPlainText();
     QString duedate = ui->newDueDate->text();
+    QString course = ui->newCourse->text();
+    QString weight = ui->newWeight->text();
+    QString diff = ui->newDifficulty->text();
     QList<QString> addTask;
     addTask.append(name);
     addTask.append(desc);
     addTask.append(duedate);
-    addTask.append("To Be Added");
+    addTask.append(course);
+    addTask.append(weight);
+    addTask.append(diff);
+    addTask.append("0");
     model->append(addTask);
     model->reset();
 }

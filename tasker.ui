@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -76,9 +76,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>110</y>
-        <width>111</width>
-        <height>31</height>
+        <y>100</y>
+        <width>121</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -191,7 +191,7 @@
      <widget class="QLineEdit" name="showWeight">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>90</x>
         <y>400</y>
         <width>81</width>
         <height>31</height>
@@ -204,6 +204,9 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>%</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="showDifficulty">
@@ -223,6 +226,9 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
+      <property name="placeholderText">
+       <string>#</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="showName">
       <property name="geometry">
@@ -235,7 +241,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>20</pointsize>
+        <pointsize>24</pointsize>
        </font>
       </property>
       <property name="text">
@@ -244,25 +250,8 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
-     </widget>
-     <widget class="QTextEdit" name="showDueDate">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>70</y>
-        <width>211</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="showCourseName">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>110</y>
-        <width>211</width>
-        <height>31</height>
-       </rect>
+      <property name="placeholderText">
+       <string>Name</string>
       </property>
      </widget>
      <widget class="QTextEdit" name="showDesc">
@@ -273,6 +262,58 @@
         <width>351</width>
         <height>211</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string>A general description of the task and what it entails.</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="showDueDate">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>71</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>mm/dd/yyyy</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="showCourseName">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>110</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Task Course</string>
       </property>
      </widget>
     </widget>
@@ -299,6 +340,9 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Task Name</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
@@ -355,7 +399,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>20</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -363,6 +407,9 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>mm/dd/yyyy</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="newCourse">
@@ -384,6 +431,9 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Task Course</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_18">
@@ -461,6 +511,9 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
+      <property name="placeholderText">
+       <string>%</string>
+      </property>
      </widget>
      <widget class="QLineEdit" name="newDifficulty">
       <property name="geometry">
@@ -478,6 +531,9 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>#</string>
       </property>
      </widget>
      <widget class="QPushButton" name="addTask">
@@ -530,6 +586,9 @@
         <width>371</width>
         <height>201</height>
        </rect>
+      </property>
+      <property name="placeholderText">
+       <string>A general description of the task and what it entails.</string>
       </property>
      </widget>
     </widget>
@@ -587,7 +646,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

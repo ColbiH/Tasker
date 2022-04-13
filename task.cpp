@@ -4,7 +4,7 @@
 
 /*---------------------------------------- Constructor ---------------------------------------*/
 task::task(string _name, string _course, string _duedate,
-	int _weight, int _diff, string _description, bool _valid) {
+    int _weight, int _diff, string _description, bool _valid, bool _complete) {
 	name = _name;
 	course = _course;
 	duedate = _duedate;
@@ -12,12 +12,17 @@ task::task(string _name, string _course, string _duedate,
 	difficulty = _diff;
 	description = _description;
 	valid = _valid;
+    complete = _complete;
 }
 
 /*------------------------------------------ Getters -----------------------------------------*/
 
 bool task::get_valid() {
 	return valid;
+}
+
+bool task::get_complete() {
+    return complete;
 }
 
 int task::get_weight() {
@@ -47,6 +52,10 @@ string task::get_description() {
 /*------------------------------------------ Setters -----------------------------------------*/
 void task::set_valid(bool _valid) {
 	valid = _valid;
+}
+
+void task::set_complete(bool _complete) {
+    complete = _complete;
 }
 
 void task::set_weight(int _weight) {

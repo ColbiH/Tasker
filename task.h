@@ -6,18 +6,19 @@ using namespace std;
 
 class task
 {
-	bool valid;
+    bool valid, complete;
 	int weight, difficulty;
 	string duedate, course, name, description;
 
 public:
 	/*---------------------------------------- Constructor ---------------------------------------*/
-	task(string _name = "Task", string _course = "None", string _duedate = "01-01-1969",
-		int _weight = 0, int _diff = 0, string _description = "", bool _valid = true);
+    task(string _name = "Task", string _course = "None", string _duedate = "01/01/1969",
+        int _weight = 0, int _diff = 0, string _description = "", bool _valid = true, bool _complete = false);
 
 
 	/*------------------------------------------ Getters -----------------------------------------*/
 	bool get_valid();
+    bool get_complete();
 	int get_weight();
 	int get_diff();
 	string get_duedate();
@@ -30,6 +31,7 @@ public:
 	void delete_Task(vector<task>& tasks, task deleted_task);
 	void update_File(vector<task>& tasks);
 	void set_valid(bool _valid);
+    void set_complete(bool _complete);
 	void set_weight(int _weight);
 	void set_diff(int _diff);
 	void set_duedate(string _duedate);
