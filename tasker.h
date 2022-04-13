@@ -23,8 +23,6 @@ public:
 private slots:
     void on_checkBox_stateChanged(int arg1);
 
-    void on_pushButton_2_clicked();
-
     void on_pushButton_5_clicked();
 
 private:
@@ -38,6 +36,10 @@ private slots:
     void on_actionImport_ics_File_triggered();
 
     void on_addTask_clicked();
+
+    void on_deleteTask_clicked();
+
+    void on_submitChanges_clicked();
 
 private:
     Ui::Tasker *ui;

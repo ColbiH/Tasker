@@ -9,7 +9,7 @@
 #include <usermodel.h>
 
 
-
+int currentTask = 0;
 
 //#include <QPixmap>
 
@@ -23,7 +23,7 @@ Tasker::Tasker(QWidget *parent)
 
     initModel();
 
-    connect(ui->pButton, &QPushButton::clicked, this, &Tasker::on_pushButton_clicked);
+    //connect(ui->pButton, &QPushButton::clicked, this, &Tasker::on_pushButton_clicked);
 
 
     /*This is for the tasker logo, not sure how to write the file path so that
@@ -90,11 +90,10 @@ void Tasker::on_pushButton_clicked()
 }
 
 
-
 void Tasker::on_comboBox_currentIndexChanged(int index)
 {
 
-
+    currentTask = index;
     ui->showName->setText(model->getData(index, 0));
     ui->showDesc->setText(model->getData(index, 1));
     ui->showDueDate->setText(model->getData(index, 2));
@@ -104,13 +103,8 @@ void Tasker::on_comboBox_currentIndexChanged(int index)
     bool checked = QVariant(model->getData(index, 6)).toBool();
     ui->checkBox->setChecked(checked);
 
+
     //Old Delete Task Button
-}
-
-
-void Tasker::on_pushButton_2_clicked()
-{
-    //Submit Changes to task
 }
 
 
@@ -144,5 +138,64 @@ void Tasker::on_addTask_clicked()
     addTask.append("0");
     model->append(addTask);
     model->reset();
+}
+
+
+void Tasker::on_deleteTask_clicked()
+{
+    if (model->rowCount() != 0){
+        model->deleteList(currentTask);
+        model->reset();
+        if (model->rowCount() == 0){
+            ui->showName->clear();
+            ui->showDesc->clear();
+            ui->showDueDate->clear();
+            ui->showCourseName->clear();
+            ui->showWeight->clear();
+            ui->showDifficulty->clear();
+            ui->checkBox->setChecked(false);
+        }
+    }
+
+}
+
+
+void Tasker::on_submitChanges_clicked()
+{
+    //Delete current task, then create a new one with current fields
+    if (model->rowCount() != 0){
+        QString name = ui->showName->text();
+        QString desc = ui->showDesc->toPlainText();
+        QString duedate = ui->showDueDate->text();
+        QString course = ui->showCourseName->text();
+        QString weight = ui->showWeight->text();
+        QString diff = ui->showDifficulty->text();
+        bool checked = ui->checkBox->isChecked();
+        int tempcurr = currentTask;
+        model->deleteList(currentTask);
+        model->reset();
+
+        QList<QString> addTask;
+        addTask.append(name);
+        addTask.append(desc);
+        addTask.append(duedate);
+        addTask.append(course);
+        addTask.append(weight);
+        addTask.append(diff);
+        addTask.append(QVariant(checked).toString());
+        model->insert(addTask, currentTask + tempcurr);
+        model->reset();
+        ui->comboBox->setCurrentIndex(currentTask + tempcurr);
+
+    }
+    else{
+        ui->showName->clear();
+        ui->showDesc->clear();
+        ui->showDueDate->clear();
+        ui->showCourseName->clear();
+        ui->showWeight->clear();
+        ui->showDifficulty->clear();
+        ui->checkBox->setChecked(false);
+    }
 }
 

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -52,7 +52,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pButton">
+     <widget class="QPushButton" name="deleteTask">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -153,22 +153,31 @@
      <widget class="QCheckBox" name="checkBox">
       <property name="geometry">
        <rect>
-        <x>200</x>
-        <y>20</y>
-        <width>171</width>
-        <height>41</height>
+        <x>290</x>
+        <y>10</y>
+        <width>81</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Mark as Done</string>
+       <string>Complete</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="submitChanges">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -235,13 +244,13 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>171</width>
+        <width>271</width>
         <height>51</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>24</pointsize>
+        <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
@@ -283,7 +292,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Segoe UI</family>
         <pointsize>18</pointsize>
        </font>
       </property>
@@ -305,7 +313,6 @@
       </property>
       <property name="font">
        <font>
-        <family>Segoe UI</family>
         <pointsize>20</pointsize>
        </font>
       </property>

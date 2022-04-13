@@ -10,7 +10,9 @@ UserModel::~UserModel()
 {
 }
 
-
+void UserModel::deleteList(int row) {
+    mDatas.remove(row);
+}
 
 
 QVariant UserModel::data(const QModelIndex& index, int role) const
@@ -67,6 +69,10 @@ int UserModel::rowCount(const QModelIndex& parent) const
 void UserModel::append(const QList<QString>& data)
 {
    mDatas.append(data);
+}
+
+void UserModel::insert(const QList<QString> &data, int index){
+    mDatas.insert(index, data);
 }
 
 void UserModel::reset()

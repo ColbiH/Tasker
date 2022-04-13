@@ -22,6 +22,10 @@ public:
 
     void append(const QList<QString>& data);
 
+    void insert(const QList<QString>& data, int index);
+
+    void deleteList(int row);
+
     void reset();
 
     QString getData(int row, int col);
