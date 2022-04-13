@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -188,7 +188,7 @@
        <string>SUBMIT CHANGES</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="showWeight">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -206,7 +206,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_5">
+     <widget class="QLineEdit" name="showDifficulty">
       <property name="geometry">
        <rect>
         <x>282</x>
@@ -224,7 +224,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
+     <widget class="QLineEdit" name="showName">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -245,7 +245,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="showDueDate">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -255,7 +255,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit_2">
+     <widget class="QTextEdit" name="showCourseName">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -265,7 +265,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit_3">
+     <widget class="QTextEdit" name="showDesc">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -365,7 +365,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_16">
+     <widget class="QLineEdit" name="newCourse">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -444,7 +444,7 @@
        <string>Difficulty:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_17">
+     <widget class="QLineEdit" name="newWeight">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -462,7 +462,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_18">
+     <widget class="QLineEdit" name="newDifficulty">
       <property name="geometry">
        <rect>
         <x>120</x>

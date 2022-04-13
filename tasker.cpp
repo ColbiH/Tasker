@@ -45,6 +45,23 @@ void Tasker::initModel()
     model = new UserModel(4);
 
 
+    vector<task> tasks = Open_File();
+    for (int i = 0; i < tasks.size(); i++) {
+
+        QString name = QString::fromStdString(tasks.at(i).get_name());
+        QString desc = QString::fromStdString(tasks.at(i).get_description());
+        QString duedate = QString::fromStdString(tasks.at(i).get_duedate());
+
+        QList<QString> test;
+        test.append(name);
+        test.append(desc);
+        test.append(duedate);
+        test.append("To Be Added");
+
+        model->append(test);
+        model->reset();
+    }
+
     //For List View!!
 
     ui->listView->setModel(model);
@@ -71,9 +88,10 @@ void Tasker::on_comboBox_currentIndexChanged(int index)
 {
 
 
-    ui->textEdit->setText(model->getData(index, 1));
-    ui->textEdit_2->setText(model->getData(index, 2));
-    ui->textEdit_3->setText(model->getData(index, 3));
+    ui->showName->setText(model->getData(index, 0));
+    ui->showDesc->setText(model->getData(index, 1));
+    ui->showDueDate->setText(model->getData(index, 2));
+    ui->showCourseName->setText(model->getData(index, 3));
 
     //Old Delete Task Button
 }
@@ -93,22 +111,7 @@ void Tasker::on_pushButton_5_clicked()
 
 void Tasker::on_actionImport_ics_File_triggered()
 {
-    vector<task> tasks = Open_File();
-    for (int i = 0; i < tasks.size(); i++) {
-
-        QString name = QString::fromStdString(tasks.at(i).get_name());
-        QString desc = QString::fromStdString(tasks.at(i).get_description());
-        QString duedate = QString::fromStdString(tasks.at(i).get_duedate());
-
-        QList<QString> test;
-        test.append(name);
-        test.append(desc);
-        test.append(duedate);
-        test.append("To Be Added");
-        model->append(test);
-        model->reset();
-    }
-
+    //ICS File
 }
 
 
@@ -124,6 +127,5 @@ void Tasker::on_addTask_clicked()
     addTask.append("To Be Added");
     model->append(addTask);
     model->reset();
-
 }
 
