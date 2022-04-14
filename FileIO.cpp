@@ -206,9 +206,13 @@ bool all_ints(string s){
 
 bool validDate(string date){
     string dT = date;
-    string dN = (date.substr(0,2) + date.substr(3,2) + date.substr(6,4)); // dateNums
-    if(dT.length()==10 && all_ints(dN)){
-        return true;
+    if(dT.length()==10){
+        string dN = (date.substr(0,2) + date.substr(3,2) + date.substr(6,4)); // dateNums
+        if(all_ints(dN)){
+            return true;
+        }else{
+            return false;
+        }
     }
     else{
         return false;
