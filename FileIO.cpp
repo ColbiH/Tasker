@@ -194,3 +194,23 @@ string trim(string s) {
     }
     return s;
 }
+bool all_ints(string s){
+    for(unsigned int i=0 ; i<s.length() ; i++){
+        if(!isdigit(s[i])){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+bool validDate(string date){
+    string dT = date;
+    string dN = (date.substr(0,2) + date.substr(3,2) + date.substr(6,4)); // dateNums
+    if(dT.length()==10 && all_ints(dN)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

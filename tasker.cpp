@@ -144,7 +144,15 @@ void Tasker::on_addTask_clicked()
     bool weightValid = all_of(weightTemp.begin(), weightTemp.end(), ::isdigit);
     string diffTemp = diff.toStdString();
     bool diffValid = all_of(diffTemp.begin(), diffTemp.end(), ::isdigit);
-    if (!weightValid && !diffValid){
+    string dateTemp = duedate.toStdString();
+
+    if(!validDate(dateTemp)){
+        QMessageBox *msgBox = new QMessageBox(this);
+            msgBox->setText("Invalid Input");
+            msgBox->setWindowModality(Qt::NonModal);
+            msgBox->setInformativeText("The due date field must have the format: mm/dd/yyyy");
+            int ret = msgBox->exec();
+    }else if (!weightValid && !diffValid){
         QMessageBox *msgBox = new QMessageBox(this);
             msgBox->setText("Invalid Input");
             msgBox->setWindowModality(Qt::NonModal);
