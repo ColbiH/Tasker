@@ -21,15 +21,11 @@ vector<task> Open_File() {
 		getline(tasks, looper);
 		while (looper == "START") {
 			// Task data
-			string name;
-			string course;
-			string duedate;
-			string desc;
-			int weight;
-			int difficulty;
+            string name, course, duedate, desc;
+            int weight, difficulty;
+            bool complete;
 
-			string tempWeight;
-			string tempDiff;
+            string tempWeight, tempDiff, tempCom;
 
 			getline(tasks, name);
 			getline(tasks, course);
@@ -38,9 +34,11 @@ vector<task> Open_File() {
 			weight = stoi(tempWeight);
 			getline(tasks, tempDiff);
 			difficulty = stoi(tempDiff);
+            getline(tasks, tempCom);
+            complete = (bool)stoi(tempCom);
 			getline(tasks, desc);
 
-            task temp(name, course, duedate, weight, difficulty, desc, 1);
+            task temp(name, course, duedate, weight, difficulty, desc, 1, complete);
 
 			returner.push_back(temp);
 
@@ -68,6 +66,7 @@ void Write_File(vector<task> tasks){
 			save_file << tasks.at(i).get_duedate() << "\n";
 			save_file << tasks.at(i).get_weight() << "\n";
 			save_file << tasks.at(i).get_diff() << "\n";
+            save_file << (int)tasks.at(i).get_complete() << "\n";
 			save_file << tasks.at(i).get_description() << "\n";
 			save_file << "END\n";
 		}
