@@ -221,7 +221,7 @@
        <set>Qt::AlignCenter</set>
       </property>
       <property name="placeholderText">
-       <string>%</string>
+       <string>#</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="showDifficulty">
