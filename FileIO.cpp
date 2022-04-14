@@ -135,7 +135,6 @@ vector<task> load_ics(string file_path) {
             }
             if (leave == false) {
                 added.push_back(hodl);
-                cout << "added task" << endl;
             }
         }
     }
