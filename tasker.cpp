@@ -212,6 +212,7 @@ void Tasker::on_submitChanges_clicked()
 {
     //Delete current task, then create a new one with current fields
     if (model->rowCount() != 0){
+        //input
         QString name = ui->showName->text();
         QString desc = ui->showDesc->toPlainText();
         QString duedate = ui->showDueDate->text();
@@ -219,22 +220,56 @@ void Tasker::on_submitChanges_clicked()
         QString weight = ui->showWeight->text();
         QString diff = ui->showDifficulty->text();
         bool checked = ui->checkBox->isChecked();
-        int tempcurr = currentTask;
-        model->deleteList(currentTask);
-        model->reset();
+        string weightTemp = weight.toStdString();
+        bool weightValid = all_ints(weightTemp);
+        string diffTemp = diff.toStdString();
+        bool diffValid = all_ints(diffTemp);
+        string dateTemp = duedate.toStdString();
 
-        QList<QString> addTask;
-        addTask.append(name);
-        addTask.append(desc);
-        addTask.append(duedate);
-        addTask.append(course);
-        addTask.append(weight);
-        addTask.append(diff);
-        addTask.append(QString::fromStdString(to_string((int)checked)));
-        model->insert(addTask, currentTask + tempcurr);
-        model->reset();
-        ui->comboBox->setCurrentIndex(currentTask + tempcurr);
+        if(!validDate(dateTemp)){
+            QMessageBox *msgBox = new QMessageBox(this);
+                msgBox->setText("Invalid Input");
+                msgBox->setWindowModality(Qt::NonModal);
+                msgBox->setInformativeText("The due date field must have the format: mm/dd/yyyy");
+                int ret = msgBox->exec();
+        }else if (!weightValid && !diffValid){
+            QMessageBox *msgBox = new QMessageBox(this);
+                msgBox->setText("Invalid Input");
+                msgBox->setWindowModality(Qt::NonModal);
+                msgBox->setInformativeText("The difficulty and weight fields must contain a positive integer");
+                int ret = msgBox->exec();
+        }
+        else if (!weightValid){
+            QMessageBox *msgBox = new QMessageBox(this);
+                msgBox->setText("Invalid Input");
+                msgBox->setWindowModality(Qt::NonModal);
+                msgBox->setInformativeText("The weight field must contain a positive integer");
+                int ret = msgBox->exec();
+        }
+        else if (!diffValid){
+            QMessageBox *msgBox = new QMessageBox(this);
+                msgBox->setText("Invalid Input");
+                msgBox->setWindowModality(Qt::NonModal);
+                msgBox->setInformativeText("The difficulty field must contain a positive integer");
+                int ret = msgBox->exec();
+        }
+        else{
+            int tempcurr = currentTask;
+            model->deleteList(currentTask);
+            model->reset();
 
+            QList<QString> addTask;
+            addTask.append(name);
+            addTask.append(desc);
+            addTask.append(duedate);
+            addTask.append(course);
+            addTask.append(weight);
+            addTask.append(diff);
+            addTask.append(QString::fromStdString(to_string((int)checked)));
+            model->insert(addTask, currentTask + tempcurr);
+            model->reset();
+            ui->comboBox->setCurrentIndex(currentTask + tempcurr);
+        }
     }
     else{
         ui->showName->clear();
