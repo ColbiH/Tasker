@@ -9,6 +9,7 @@
 #include <QTableView>
 #include <usermodel.h>
 #include <QMessageBox>
+#include <QFileDialog>
 
 
 int currentTask = 0;
@@ -129,6 +130,13 @@ void Tasker::on_pushButton_5_clicked()
 void Tasker::on_actionImport_ics_File_triggered()
 {
     //ICS File
+    QString filter = "Calender File (*.ics)";
+    QString file_name = QFileDialog::getOpenFileName(this, "Open a Calender File", QDir::homePath(), filter);
+    vector<task> tasks = load_ics(file_name.toStdString());
+    for(unsigned int i=0 ; i<tasks.size() ; i++){
+        model->append(from_task(tasks[i]));
+        model->reset();
+    }
 }
 
 

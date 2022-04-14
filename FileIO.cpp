@@ -75,7 +75,7 @@ void Write_File(vector<task> tasks){
 
 
 /*--------------------------------------- Load ICS ----------------------------------------*/
-vector<task> load_ics(string file_path, vector<task>& existing) {
+vector<task> load_ics(string file_path) {
 
     string holder, name, course;
     vector<task> added;
@@ -129,10 +129,7 @@ vector<task> load_ics(string file_path, vector<task>& existing) {
 
     in_file.close();
 
-    for (unsigned int i = 0; i < added.size(); i++) {
-        existing.push_back(added[i]);
-    }
-    return existing;
+    return added;
 }
 
 /*--------------------------------------- Helpers ----------------------------------------*/
@@ -142,7 +139,7 @@ string decode_date(string in) {
     y = hold.substr(0, 4);
     m = hold.substr(4, 2);
     d = hold.substr(6, 2);
-    return m + "-" + d + "-" + y;
+    return m + "/" + d + "/" + y;
 }
 
 void decode_summary(string sum, string& name, string& course) {

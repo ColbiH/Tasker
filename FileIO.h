@@ -7,7 +7,7 @@ vector<task> Open_File();
 void Write_File(vector<task> tasks);
 
 /*------------------------ Load ICS ------------------------*/
-vector<task> load_ics(string file_path, vector<task>& existing);
+vector<task> load_ics(string file_path);
 
 /*------------------------ Helpers -------------------------*/
 string decode_date(string in);
