@@ -2,6 +2,7 @@
 #include "ui_tasker.h"
 
 #include "task.h"
+#include "task_sorting.h"
 #include "FileIO.h"
 #include <iostream>
 
@@ -93,15 +94,6 @@ void Tasker::on_checkBox_stateChanged(int arg1)
     //Checkbox for marking a task as complete
 
 }
-
-
-void Tasker::on_pushButton_clicked()
-{
-
-
-
-}
-
 
 void Tasker::on_comboBox_currentIndexChanged(int index)
 {
@@ -264,5 +256,65 @@ void Tasker::on_actionSave_Tasks_triggered()
     }
 
     Write_File(outTasks);
+}
+
+void Tasker::updateModel(vector<task> tasks){
+    delete[] model;
+    model = new UserModel(7);
+    for (int i = 0; i < tasks.size(); i++) {
+        QList<QString> test = from_task(tasks.at(i));
+
+        model->append(test);
+        model->reset();
+    }
+
+    //For List View!!
+    ui->listView->setModel(model);
+    ui->comboBox->setModel(model);
+}
+
+void Tasker::on_pushButton_clicked()
+{
+    // Sort tasks based on due date.
+    vector<task> tasks;
+    for (unsigned int i = 0; i < model->rowCount(); i++){
+        tasks.push_back(to_task(model->getLine(i)));
+    }
+    tasks = task_sort(tasks, attributes::date);
+    updateModel(tasks);
+}
+
+void Tasker::on_pushButton_2_clicked()
+{
+    // Sort by Course
+    vector<task> tasks;
+    for (unsigned int i = 0; i < model->rowCount(); i++){
+        tasks.push_back(to_task(model->getLine(i)));
+    }
+    tasks = task_sort(tasks, attributes::course);
+    updateModel(tasks);
+}
+
+void Tasker::on_pushButton_3_clicked()
+{
+    // Sort by Weight
+    vector<task> tasks;
+    for (unsigned int i = 0; i < model->rowCount(); i++){
+        tasks.push_back(to_task(model->getLine(i)));
+    }
+    tasks = task_sort(tasks, attributes::weight);
+    updateModel(tasks);
+}
+
+
+void Tasker::on_pushButton_4_clicked()
+{
+    // Sort by Difficulty
+    vector<task> tasks;
+    for (unsigned int i = 0; i < model->rowCount(); i++){
+        tasks.push_back(to_task(model->getLine(i)));
+    }
+    tasks = task_sort(tasks, attributes::diff);
+    updateModel(tasks);
 }
 

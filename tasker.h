@@ -29,6 +29,7 @@ private slots:
 
 private:
     void initModel();
+    void updateModel(vector<task> tasks);
     task to_task(QList<QString> q_task);
     QList<QString> from_task(task _task);
 
@@ -46,6 +47,12 @@ private slots:
     void on_submitChanges_clicked();
 
     void on_actionSave_Tasks_triggered();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::Tasker *ui;
