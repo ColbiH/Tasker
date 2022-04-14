@@ -4,6 +4,7 @@
 #include "task.h"
 #include <string>
 #include "FileIO.h"
+#include <ctime>
 
 using namespace std;
 
@@ -95,8 +96,17 @@ vector<task> load_ics(string file_path) {
             task hodl;
 
             while (getline(in_file, holder)) {
-                if (holder.substr(0, 5) == "DTEND")
+                if (holder.substr(0, 5) == "DTEND") {
                     hodl.set_duedate(decode_date(only_numbers(holder)));
+                    time_t t = time(NULL);
+                    tm* timePtr = localtime(&t);
+                      if(stoi(hodl.get_duedate().substr(0,2)) < timePtr->tm_mon + 1)
+                          leave = true;
+
+                      else if(stoi(hodl.get_duedate().substr(0,2)) == timePtr->tm_mon + 1 && stoi(hodl.get_duedate().substr(3,2)) < timePtr->tm_mday)
+                          leave = true;
+                }
+
 
                 if (holder.substr(0, 12) == "DESCRIPTION:") {
                     if (holder.find("Zoom") != string::npos) {
@@ -123,7 +133,10 @@ vector<task> load_ics(string file_path) {
                     break;
                 }
             }
-            if (leave == false) added.push_back(hodl);
+            if (leave == false) {
+                added.push_back(hodl);
+                cout << "added task" << endl;
+            }
         }
     }
 
