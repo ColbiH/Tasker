@@ -11,11 +11,12 @@
 #include <usermodel.h>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QCloseEvent>
 
 
 int currentTask = 0;
 
-//#include <QPixmap>
+#include <QPixmap>
 
 
 Tasker::Tasker(QWidget *parent)
@@ -33,8 +34,9 @@ Tasker::Tasker(QWidget *parent)
     /*This is for the tasker logo, not sure how to write the file path so that
      * it's not a local path*/
 
-    //QPixmap pix("C:/Users/jorda/OneDrive/Documents/GitHub/Tasker/Tasker_logo.png");
-    //ui->label_logo->setPixmap(pix);
+    QPixmap pix("Resources/Tasker_logo.png");
+    ui->label_logo->setScaledContents(true);
+    ui->label_logo->setPixmap(pix);
 
 }
 
@@ -87,12 +89,32 @@ void Tasker::initModel()
 
     ui->listView->setModel(model);
     ui->comboBox->setModel(model);
+
+    forceExit = false;
+    madeChanges = false;
 }
 
-void Tasker::on_checkBox_stateChanged(int arg1)
+void Tasker::closeEvent (QCloseEvent *event)
 {
-    //Checkbox for marking a task as complete
+    if (!forceExit && madeChanges){
+        QMessageBox::StandardButton resBtn = QMessageBox::question(this, "Tasker",
+                                                                   tr("Do you want to save before exiting?\n"),
+                                                                   QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                                   QMessageBox::Yes);
+        if (resBtn == QMessageBox::Cancel) {
+            event->ignore();
+        } else if(resBtn == QMessageBox::No){
+            event->accept();
+        } else if (resBtn == QMessageBox::Yes){
+            vector<task> outTasks;
+            for (int i = 0; i < model->rowCount(); i++){
+                outTasks.push_back(to_task(model->getLine(i)));
+            }
 
+            Write_File(outTasks);
+            event->accept();
+        }
+    }
 }
 
 void Tasker::on_comboBox_currentIndexChanged(int index)
@@ -109,15 +131,9 @@ void Tasker::on_comboBox_currentIndexChanged(int index)
     ui->checkBox->setChecked(checked);
 
 
+
     //Old Delete Task Button
 }
-
-
-void Tasker::on_pushButton_5_clicked()
-{
-    //Add new task
-}
-
 
 void Tasker::on_actionImport_ics_File_triggered()
 {
@@ -129,6 +145,7 @@ void Tasker::on_actionImport_ics_File_triggered()
         model->append(from_task(tasks[i]));
         model->reset();
     }
+    madeChanges = true;
 }
 
 
@@ -151,27 +168,27 @@ void Tasker::on_addTask_clicked()
             msgBox->setText("Invalid Input");
             msgBox->setWindowModality(Qt::NonModal);
             msgBox->setInformativeText("The due date field must have the format: mm/dd/yyyy");
-            int ret = msgBox->exec();
+            msgBox->exec();
     }else if (!weightValid && !diffValid){
         QMessageBox *msgBox = new QMessageBox(this);
             msgBox->setText("Invalid Input");
             msgBox->setWindowModality(Qt::NonModal);
             msgBox->setInformativeText("The difficulty and weight fields must contain a positive integer");
-            int ret = msgBox->exec();
+            msgBox->exec();
     }
     else if (!weightValid){
         QMessageBox *msgBox = new QMessageBox(this);
             msgBox->setText("Invalid Input");
             msgBox->setWindowModality(Qt::NonModal);
             msgBox->setInformativeText("The weight field must contain a positive integer");
-            int ret = msgBox->exec();
+            msgBox->exec();
     }
     else if (!diffValid){
         QMessageBox *msgBox = new QMessageBox(this);
             msgBox->setText("Invalid Input");
             msgBox->setWindowModality(Qt::NonModal);
             msgBox->setInformativeText("The difficulty field must contain a positive integer");
-            int ret = msgBox->exec();
+            msgBox->exec();
     }
     else{
         QList<QString> addTask;
@@ -184,6 +201,7 @@ void Tasker::on_addTask_clicked()
         addTask.append("0");
         model->append(addTask);
         model->reset();
+        madeChanges = true;
     }
 
 }
@@ -194,6 +212,7 @@ void Tasker::on_deleteTask_clicked()
     if (model->rowCount() != 0){
         model->deleteList(currentTask);
         model->reset();
+        madeChanges = true;
         if (model->rowCount() == 0){
             ui->showName->clear();
             ui->showDesc->clear();
@@ -204,6 +223,7 @@ void Tasker::on_deleteTask_clicked()
             ui->checkBox->setChecked(false);
         }
     }
+
 
 }
 
@@ -231,27 +251,27 @@ void Tasker::on_submitChanges_clicked()
                 msgBox->setText("Invalid Input");
                 msgBox->setWindowModality(Qt::NonModal);
                 msgBox->setInformativeText("The due date field must have the format: mm/dd/yyyy");
-                int ret = msgBox->exec();
+                msgBox->exec();
         }else if (!weightValid && !diffValid){
             QMessageBox *msgBox = new QMessageBox(this);
                 msgBox->setText("Invalid Input");
                 msgBox->setWindowModality(Qt::NonModal);
                 msgBox->setInformativeText("The difficulty and weight fields must contain a positive integer");
-                int ret = msgBox->exec();
+                msgBox->exec();
         }
         else if (!weightValid){
             QMessageBox *msgBox = new QMessageBox(this);
                 msgBox->setText("Invalid Input");
                 msgBox->setWindowModality(Qt::NonModal);
                 msgBox->setInformativeText("The weight field must contain a positive integer");
-                int ret = msgBox->exec();
+                msgBox->exec();
         }
         else if (!diffValid){
             QMessageBox *msgBox = new QMessageBox(this);
                 msgBox->setText("Invalid Input");
                 msgBox->setWindowModality(Qt::NonModal);
                 msgBox->setInformativeText("The difficulty field must contain a positive integer");
-                int ret = msgBox->exec();
+                msgBox->exec();
         }
         else{
             int tempcurr = currentTask;
@@ -269,6 +289,7 @@ void Tasker::on_submitChanges_clicked()
             model->insert(addTask, currentTask + tempcurr);
             model->reset();
             ui->comboBox->setCurrentIndex(currentTask + tempcurr);
+            madeChanges = true;
         }
     }
     else{
@@ -286,11 +307,12 @@ void Tasker::on_submitChanges_clicked()
 void Tasker::on_actionSave_Tasks_triggered()
 {
     vector<task> outTasks;
-    for (unsigned int i = 0; i < model->rowCount(); i++){
+    for (int i = 0; i < model->rowCount(); i++){
         outTasks.push_back(to_task(model->getLine(i)));
     }
 
     Write_File(outTasks);
+    madeChanges = false;
 }
 
 void Tasker::updateModel(vector<task> tasks){
@@ -312,7 +334,7 @@ void Tasker::on_pushButton_clicked()
 {
     // Sort tasks based on due date.
     vector<task> tasks;
-    for (unsigned int i = 0; i < model->rowCount(); i++){
+    for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
     tasks = task_sort(tasks, attributes::date);
@@ -323,7 +345,7 @@ void Tasker::on_pushButton_2_clicked()
 {
     // Sort by Course
     vector<task> tasks;
-    for (unsigned int i = 0; i < model->rowCount(); i++){
+    for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
     tasks = task_sort(tasks, attributes::course);
@@ -334,7 +356,7 @@ void Tasker::on_pushButton_3_clicked()
 {
     // Sort by Weight
     vector<task> tasks;
-    for (unsigned int i = 0; i < model->rowCount(); i++){
+    for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
     tasks = task_sort(tasks, attributes::weight);
@@ -346,10 +368,43 @@ void Tasker::on_pushButton_4_clicked()
 {
     // Sort by Difficulty
     vector<task> tasks;
-    for (unsigned int i = 0; i < model->rowCount(); i++){
+    for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
     tasks = task_sort(tasks, attributes::diff);
     updateModel(tasks);
 }
 
+
+void Tasker::on_actionExit_Without_Saving_triggered()
+{
+    forceExit = true;
+    QApplication::quit();
+}
+
+
+void Tasker::on_actionExit_And_Save_triggered()
+{
+    vector<task> outTasks;
+    for (int i = 0; i < model->rowCount(); i++){
+        outTasks.push_back(to_task(model->getLine(i)));
+    }
+
+    Write_File(outTasks);
+    forceExit = true;
+    QApplication::quit();
+}
+
+
+void Tasker::on_listView_clicked(const QModelIndex &index)
+{
+    currentTask = index.row();
+    ui->showName->setText(model->getData(index.row(), 0));
+    ui->showDesc->setText(model->getData(index.row(), 1));
+    ui->showDueDate->setText(model->getData(index.row(), 2));
+    ui->showCourseName->setText(model->getData(index.row(), 3));
+    ui->showWeight->setText(model->getData(index.row(), 4));
+    ui->showDifficulty->setText(model->getData(index.row(), 5));
+    bool checked = QVariant(model->getData(index.row(), 6)).toBool();
+    ui->checkBox->setChecked(checked);
+}

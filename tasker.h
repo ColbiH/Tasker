@@ -21,12 +21,6 @@ public:
     Tasker(QWidget *parent = nullptr);
     ~Tasker();
 
-
-private slots:
-    void on_checkBox_stateChanged(int arg1);
-
-    void on_pushButton_5_clicked();
-
 private:
     void initModel();
     void updateModel(vector<task> tasks);
@@ -54,9 +48,18 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_actionExit_Without_Saving_triggered();
+
+    void on_actionExit_And_Save_triggered();
+
+    void closeEvent (QCloseEvent *event);
+
+    void on_listView_clicked(const QModelIndex &index);
+
 private:
     Ui::Tasker *ui;
-
+    bool madeChanges;
+    bool forceExit;
     UserModel* model;
 
 };

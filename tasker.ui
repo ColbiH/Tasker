@@ -10,6 +10,12 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Tasker</string>
   </property>
@@ -616,9 +622,9 @@
    <widget class="QLabel" name="label_logo">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>730</x>
       <y>0</y>
-      <width>71</width>
+      <width>61</width>
       <height>61</height>
      </rect>
     </property>
@@ -640,16 +646,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>50</y>
       <width>371</width>
-      <height>471</height>
+      <height>501</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
       <width>71</width>
       <height>31</height>
@@ -701,7 +707,7 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>312</x>
+      <x>310</x>
       <y>10</y>
       <width>71</width>
       <height>29</height>
@@ -711,6 +717,16 @@
      <string>Difficulty</string>
     </property>
    </widget>
+   <zorder>tabWidget</zorder>
+   <zorder>label</zorder>
+   <zorder>label_logo</zorder>
+   <zorder>comboBox</zorder>
+   <zorder>label_10</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton_3</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>listView</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -718,7 +734,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
