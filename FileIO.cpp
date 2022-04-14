@@ -39,7 +39,7 @@ vector<task> Open_File() {
 			difficulty = stoi(tempDiff);
 			getline(tasks, desc);
 
-			task temp(name, course, duedate, weight, difficulty, desc, true);
+            task temp(name, course, duedate, weight, difficulty, desc, 1);
 
 			returner.push_back(temp);
 

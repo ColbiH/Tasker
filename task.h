@@ -13,7 +13,7 @@ class task
 public:
 	/*---------------------------------------- Constructor ---------------------------------------*/
     task(string _name = "Task", string _course = "None", string _duedate = "01/01/1969",
-        int _weight = 0, int _diff = 0, string _description = "", bool _valid = true, bool _complete = false);
+        int _weight = 0, int _diff = 0, string _description = "", bool _valid = 1, bool _complete = 0);
 
 
 	/*------------------------------------------ Getters -----------------------------------------*/

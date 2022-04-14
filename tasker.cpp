@@ -149,9 +149,9 @@ void Tasker::on_addTask_clicked()
     QString weight = ui->newWeight->text();
     QString diff = ui->newDifficulty->text();
     string weightTemp = weight.toStdString();
-    bool weightValid = all_of(weightTemp.begin(), weightTemp.end(), ::isdigit);
+    bool weightValid = all_ints(weightTemp);
     string diffTemp = diff.toStdString();
-    bool diffValid = all_of(diffTemp.begin(), diffTemp.end(), ::isdigit);
+    bool diffValid = all_ints(diffTemp);
     string dateTemp = duedate.toStdString();
 
     if(!validDate(dateTemp)){
@@ -238,7 +238,7 @@ void Tasker::on_submitChanges_clicked()
         addTask.append(course);
         addTask.append(weight);
         addTask.append(diff);
-        addTask.append(QVariant(checked).toString());
+        addTask.append(QString::fromStdString(to_string((int)checked)));
         model->insert(addTask, currentTask + tempcurr);
         model->reset();
         ui->comboBox->setCurrentIndex(currentTask + tempcurr);
