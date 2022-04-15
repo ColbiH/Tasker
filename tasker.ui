@@ -636,19 +636,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>54</y>
       <width>371</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="listView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>371</width>
-      <height>501</height>
+      <height>20</height>
      </rect>
     </property>
    </widget>
@@ -717,16 +707,29 @@
      <string>Difficulty</string>
     </property>
    </widget>
-   <zorder>tabWidget</zorder>
-   <zorder>label</zorder>
-   <zorder>label_logo</zorder>
-   <zorder>comboBox</zorder>
-   <zorder>label_10</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>listView</zorder>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>51</y>
+      <width>381</width>
+      <height>501</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>10</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Low to High</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -734,7 +737,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

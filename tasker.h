@@ -26,6 +26,8 @@ private:
     void updateModel(vector<task> tasks);
     task to_task(QList<QString> q_task);
     QList<QString> from_task(task _task);
+    QList<QString> modelToItems(UserModel* model);
+    void updateColors();
 
 private slots:
     void on_pushButton_clicked();
@@ -54,7 +56,9 @@ private slots:
 
     void closeEvent (QCloseEvent *event);
 
-    void on_listView_clicked(const QModelIndex &index);
+    //void on_listView_clicked(const QModelIndex &index);
+
+    void on_listWidget_clicked(const QModelIndex &index);
 
 private:
     Ui::Tasker *ui;

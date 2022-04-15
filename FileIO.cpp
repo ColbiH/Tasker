@@ -21,11 +21,11 @@ vector<task> Open_File() {
 		getline(tasks, looper);
 		while (looper == "START") {
 			// Task data
-            string name, course, duedate, desc;
+            string name, course, duedate, desc = "";
             int weight, difficulty;
             bool complete;
 
-            string tempWeight, tempDiff, tempCom;
+            string tempWeight, tempDiff, tempCom, holder;
 
 			getline(tasks, name);
 			getline(tasks, course);
@@ -36,15 +36,19 @@ vector<task> Open_File() {
 			difficulty = stoi(tempDiff);
             getline(tasks, tempCom);
             complete = (bool)stoi(tempCom);
-			getline(tasks, desc);
+
+            getline(tasks, holder);
+            desc += holder;
+            getline(tasks, holder);
+            while(holder != "END"){
+             desc += '\n';
+             desc += holder;
+             getline(tasks, holder);
+            }
 
             task temp(name, course, duedate, weight, difficulty, desc, 1, complete);
 
-			returner.push_back(temp);
-
-			//END
-			string tempS;
-			getline(tasks, tempS);
+            returner.push_back(temp);
 
 			//either next start or end of file.
 			getline(tasks, looper);

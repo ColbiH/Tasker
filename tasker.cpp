@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QListWidgetItem>
 
 
 int currentTask = 0;
@@ -87,7 +88,9 @@ void Tasker::initModel()
 
     //For List View!!
 
-    ui->listView->setModel(model);
+    QList<QString> list = modelToItems(model);
+    ui->listWidget->clear();
+    ui->listWidget->addItems(list);
     ui->comboBox->setModel(model);
 
     forceExit = false;
@@ -145,6 +148,9 @@ void Tasker::on_actionImport_ics_File_triggered()
         model->append(from_task(tasks[i]));
         model->reset();
     }
+    QList<QString> list = modelToItems(model);
+    ui->listWidget->clear();
+    ui->listWidget->addItems(list);
     madeChanges = true;
 }
 
@@ -201,6 +207,9 @@ void Tasker::on_addTask_clicked()
         addTask.append("0");
         model->append(addTask);
         model->reset();
+        QList<QString> list = modelToItems(model);
+        ui->listWidget->clear();
+        ui->listWidget->addItems(list);
         madeChanges = true;
     }
 
@@ -211,6 +220,9 @@ void Tasker::on_deleteTask_clicked()
 {
     if (model->rowCount() != 0){
         model->deleteList(currentTask);
+        QList<QString> list = modelToItems(model);
+        ui->listWidget->clear();
+        ui->listWidget->addItems(list);
         model->reset();
         madeChanges = true;
         if (model->rowCount() == 0){
@@ -289,6 +301,9 @@ void Tasker::on_submitChanges_clicked()
             model->insert(addTask, currentTask + tempcurr);
             model->reset();
             ui->comboBox->setCurrentIndex(currentTask + tempcurr);
+            QList<QString> list = modelToItems(model);
+            ui->listWidget->clear();
+            ui->listWidget->addItems(list);
             madeChanges = true;
         }
     }
@@ -326,8 +341,30 @@ void Tasker::updateModel(vector<task> tasks){
     }
 
     //For List View!!
-    ui->listView->setModel(model);
+    updateColors();
+    QList<QString> list = modelToItems(model);
+    ui->listWidget->clear();
+    ui->listWidget->addItems(list);
     ui->comboBox->setModel(model);
+}
+
+QList<QString> Tasker::modelToItems(UserModel* model){
+    QList<QString> list;
+    for(int i=0 ; i < model->rowCount() ; i++){
+        list.append(model->getData(i, 0));
+    }
+    return list;
+}
+
+void Tasker::updateColors(){
+//    QModelIndex vIndex = model->index(0, 0);
+//    QMap<int, QVariant> vMap = model->itemData(vIndex);
+//    vMap.insert(Qt::BackgroundRole, QVariant(QBrush(Qt::red)));
+//    model->setItemData(vIndex, vMap);
+
+    //for(int i=0 ; i < model->rowCount() ; i++){
+
+    //}
 }
 
 void Tasker::on_pushButton_clicked()
@@ -337,7 +374,9 @@ void Tasker::on_pushButton_clicked()
     for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
-    tasks = task_sort(tasks, attributes::date);
+    bool ascending = ui->checkBox_2->isChecked();
+    tasks = task_sort(tasks, attributes::date, ascending);
+    tasks = task_sort(tasks, attributes::date, ascending);
     updateModel(tasks);
 }
 
@@ -348,7 +387,9 @@ void Tasker::on_pushButton_2_clicked()
     for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
-    tasks = task_sort(tasks, attributes::course);
+    bool ascending = ui->checkBox_2->isChecked();
+    tasks = task_sort(tasks, attributes::course, ascending);
+    tasks = task_sort(tasks, attributes::course, ascending);
     updateModel(tasks);
 }
 
@@ -359,7 +400,9 @@ void Tasker::on_pushButton_3_clicked()
     for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
-    tasks = task_sort(tasks, attributes::weight);
+    bool ascending = ui->checkBox_2->isChecked();
+    tasks = task_sort(tasks, attributes::weight, ascending);
+    tasks = task_sort(tasks, attributes::weight, ascending);
     updateModel(tasks);
 }
 
@@ -371,7 +414,9 @@ void Tasker::on_pushButton_4_clicked()
     for (int i = 0; i < model->rowCount(); i++){
         tasks.push_back(to_task(model->getLine(i)));
     }
-    tasks = task_sort(tasks, attributes::diff);
+    bool ascending = ui->checkBox_2->isChecked();
+    tasks = task_sort(tasks, attributes::diff, ascending);
+    tasks = task_sort(tasks, attributes::diff, ascending);
     updateModel(tasks);
 }
 
@@ -396,8 +441,24 @@ void Tasker::on_actionExit_And_Save_triggered()
 }
 
 
-void Tasker::on_listView_clicked(const QModelIndex &index)
+//void Tasker::on_listView_clicked(const QModelIndex &index)
+//{
+//    currentTask = index.row();
+//    ui->showName->setText(model->getData(index.row(), 0));
+//    ui->showDesc->setText(model->getData(index.row(), 1));
+//    ui->showDueDate->setText(model->getData(index.row(), 2));
+//    ui->showCourseName->setText(model->getData(index.row(), 3));
+//    ui->showWeight->setText(model->getData(index.row(), 4));
+//    ui->showDifficulty->setText(model->getData(index.row(), 5));
+//    bool checked = QVariant(model->getData(index.row(), 6)).toBool();
+//    ui->checkBox->setChecked(checked);
+//}
+
+void Tasker::on_listWidget_clicked(const QModelIndex &index)
 {
+//    QListWidgetItem* itm = ui->listWidget->itemFromIndex(index);
+//    itm->setForeground(QBrush(Qt::red));
+
     currentTask = index.row();
     ui->showName->setText(model->getData(index.row(), 0));
     ui->showDesc->setText(model->getData(index.row(), 1));
@@ -408,3 +469,4 @@ void Tasker::on_listView_clicked(const QModelIndex &index)
     bool checked = QVariant(model->getData(index.row(), 6)).toBool();
     ui->checkBox->setChecked(checked);
 }
+
