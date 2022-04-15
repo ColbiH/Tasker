@@ -369,55 +369,63 @@ void Tasker::updateColors(){
 
 void Tasker::on_pushButton_clicked()
 {
-    // Sort tasks based on due date.
-    vector<task> tasks;
-    for (int i = 0; i < model->rowCount(); i++){
-        tasks.push_back(to_task(model->getLine(i)));
+    if (model->rowCount() != 0){
+        // Sort tasks based on due date.
+        vector<task> tasks;
+        for (int i = 0; i < model->rowCount(); i++){
+            tasks.push_back(to_task(model->getLine(i)));
+        }
+        bool ascending = ui->checkBox_2->isChecked();
+        tasks = task_sort(tasks, attributes::date, ascending);
+        tasks = task_sort(tasks, attributes::date, ascending);
+        updateModel(tasks);
     }
-    bool ascending = ui->checkBox_2->isChecked();
-    tasks = task_sort(tasks, attributes::date, ascending);
-    tasks = task_sort(tasks, attributes::date, ascending);
-    updateModel(tasks);
 }
 
 void Tasker::on_pushButton_2_clicked()
 {
-    // Sort by Course
-    vector<task> tasks;
-    for (int i = 0; i < model->rowCount(); i++){
-        tasks.push_back(to_task(model->getLine(i)));
+    if (model->rowCount() != 0){
+        // Sort by Course
+        vector<task> tasks;
+        for (int i = 0; i < model->rowCount(); i++){
+            tasks.push_back(to_task(model->getLine(i)));
+        }
+        bool ascending = ui->checkBox_2->isChecked();
+        tasks = task_sort(tasks, attributes::course, ascending);
+        tasks = task_sort(tasks, attributes::course, ascending);
+        updateModel(tasks);
     }
-    bool ascending = ui->checkBox_2->isChecked();
-    tasks = task_sort(tasks, attributes::course, ascending);
-    tasks = task_sort(tasks, attributes::course, ascending);
-    updateModel(tasks);
 }
 
 void Tasker::on_pushButton_3_clicked()
 {
-    // Sort by Weight
-    vector<task> tasks;
-    for (int i = 0; i < model->rowCount(); i++){
-        tasks.push_back(to_task(model->getLine(i)));
+    if (model->rowCount() != 0){
+        // Sort by Weight
+        vector<task> tasks;
+        for (int i = 0; i < model->rowCount(); i++){
+            tasks.push_back(to_task(model->getLine(i)));
+        }
+        bool ascending = ui->checkBox_2->isChecked();
+        tasks = task_sort(tasks, attributes::weight, ascending);
+        tasks = task_sort(tasks, attributes::weight, ascending);
+        updateModel(tasks);
     }
-    bool ascending = ui->checkBox_2->isChecked();
-    tasks = task_sort(tasks, attributes::weight, ascending);
-    tasks = task_sort(tasks, attributes::weight, ascending);
-    updateModel(tasks);
 }
 
 
 void Tasker::on_pushButton_4_clicked()
 {
-    // Sort by Difficulty
-    vector<task> tasks;
-    for (int i = 0; i < model->rowCount(); i++){
-        tasks.push_back(to_task(model->getLine(i)));
+    if (model->rowCount() != 0){
+        // Sort by Difficulty
+        vector<task> tasks;
+        for (int i = 0; i < model->rowCount(); i++){
+            tasks.push_back(to_task(model->getLine(i)));
+        }
+        bool ascending = ui->checkBox_2->isChecked();
+        tasks = task_sort(tasks, attributes::diff, ascending);
+        tasks = task_sort(tasks, attributes::diff, ascending);
+        updateModel(tasks);
     }
-    bool ascending = ui->checkBox_2->isChecked();
-    tasks = task_sort(tasks, attributes::diff, ascending);
-    tasks = task_sort(tasks, attributes::diff, ascending);
-    updateModel(tasks);
 }
 
 
