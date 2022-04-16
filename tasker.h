@@ -27,7 +27,11 @@ private:
     task to_task(QList<QString> q_task);
     QList<QString> from_task(task _task);
     QList<QString> modelToItems(UserModel* model);
+    QList<QString> modelToCourses(UserModel *model);
+    void setList();
     void updateColors();
+    void loadColor();
+    void storeColor();
 
 private slots:
     void on_pushButton_clicked();
@@ -60,11 +64,18 @@ private slots:
 
     void on_listWidget_clicked(const QModelIndex &index);
 
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::Tasker *ui;
     bool madeChanges;
     bool forceExit;
+    QMap<int, QColor> colorMapIn;
+    QMap<QString, int> colorCoordination;
     UserModel* model;
+    task::task_colors colors = task::task_colors(QString("Resources/colors.txt").toStdString());
 
 };
 #endif // TASKER_H

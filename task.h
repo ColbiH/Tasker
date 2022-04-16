@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <map>
 using namespace std;
 
 class task
@@ -36,5 +37,28 @@ public:
 	void set_course(string _course);
 	void set_name(string _name);
 	void set_description(string _description);
+
+    /*------------------------------------------ Colors -----------------------------------------*/
+
+    struct task_colors{
+
+        map<string,int> colors;
+        string filepath;
+
+
+        /*---------------------------------------- Constructor ---------------------------------------*/
+        task_colors(string filepath);
+
+        /*------------------------------------------ Getters -----------------------------------------*/
+        map<string,int> get_colors();
+
+        /*------------------------------------------ Setters -----------------------------------------*/
+        void set_colors(map<string,int>& colors);
+        void update_color(pair<string, int>& color);
+        /*------------------------------------------ Helpers -----------------------------------------*/
+        void load_file();
+        void out_file();
+        pair<string, int> get_pair(string s);
+    };
 
 };

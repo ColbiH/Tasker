@@ -130,6 +130,11 @@ vector<task> load_ics(string file_path) {
                 }
 
                 if (holder.substr(0, 8) == "SUMMARY:") {
+                    string next;
+                    getline(in_file, next);
+                    if(next.substr(0,4) != "URL:"){
+                        holder+=next.substr(1);
+                    }
                     decode_summary(holder.substr(8), name, course);
                     hodl.set_course(course);
                     hodl.set_name(name);
@@ -230,3 +235,4 @@ bool validDate(string date){
         return false;
     }
 }
+

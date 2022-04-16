@@ -90,3 +90,79 @@ void task::set_name(string _name) {
 void task::set_description(string _description) {
 	description = _description;
 }
+
+/*------------------------------------------ Colors -----------------------------------------*/
+
+/*---------------------------------------- Constructor ---------------------------------------*/
+task::task_colors::task_colors(string _filepath) {
+    filepath = _filepath;
+    load_file();
+}
+
+/*------------------------------------------ Getters -----------------------------------------*/
+map<string,int> task::task_colors::get_colors() {
+    return colors;
+}
+
+/*------------------------------------------ Setters -----------------------------------------*/
+void task::task_colors::set_colors(map<string,int>& _colors) {
+    colors = _colors;
+    out_file();
+}
+
+void task::task_colors::update_color(pair<string, int>& color) {
+    colors[color.first] = color.second;
+    out_file();
+}
+/*------------------------------------------ Helpers -----------------------------------------*/
+void task::task_colors::load_file() {
+    map<string,int> temp;
+    string len, holder;
+    pair<string, int> p;
+
+    ifstream in_file;
+    in_file.open(filepath);
+
+    getline(in_file, len);
+    for (int i = 0; i < stoi(len); i++) {
+        getline(in_file, holder);
+        p = get_pair(holder);
+        temp[p.first] = p.second;
+    }
+
+    in_file.close();
+    colors = temp;
+}
+
+void task::task_colors::out_file() {
+    ofstream file;
+    file.open(filepath);
+
+    string holder = "";
+    file << colors.size() << '\n';
+    for (pair<string, int> p : colors) {
+        holder = "\"";
+        holder += p.first;
+        holder += "\",";
+        holder += to_string(p.second);
+        file << holder << '\n';
+    }
+
+    file.close();
+}
+
+pair<string, int> task::task_colors::get_pair(string s) {
+    pair<string, char> p;
+    string holder;
+    for (unsigned int i = 1; i < s.length(); i++) {
+        if (s[i] == '\"') {
+            p.first = holder;
+            break;
+        }
+        else {
+            holder += s[i];
+        }
+    }
+    p.second = stoi(s.substr(s.length()-1,1));
+    return p;
+}

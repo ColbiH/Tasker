@@ -72,11 +72,20 @@ QList<QString> Tasker::from_task(task _task){
     return holder;
 }
 
+void Tasker::setList(){
+    QList<QString> list = modelToItems(model);
+    QList<QString> courses = modelToCourses(model);
+    ui->listWidget->clear();
+    ui->listWidget->addItems(list);
+    for(int i =0 ; i < list.size() ; i++){
+        int c = colorCoordination[courses[i]];
+        ui->listWidget->item(i)->setForeground(QBrush(colorMapIn[c]));
+    }
+}
+
 void Tasker::initModel()
 {
     model = new UserModel(7);
-
-
     vector<task> tasks = Open_File();
     for (int i = 0; i < tasks.size(); i++) {
 
@@ -86,11 +95,38 @@ void Tasker::initModel()
             model->reset();
     }
 
+    //Color
+
+    //QMap<int, QColor> colorMapIn;
+    colorMapIn[0] = Qt::black;
+    colorMapIn[1] = Qt::red;
+    colorMapIn[2] = Qt::green;
+    colorMapIn[3] = Qt::blue;
+    colorMapIn[4] = Qt::cyan;
+    colorMapIn[5] = Qt::magenta;
+    colorMapIn[6] = Qt::darkRed;
+    colorMapIn[7] = Qt::darkGreen;
+    colorMapIn[8] = Qt::darkBlue;
+    colorMapIn[9] = Qt::darkMagenta;
+    QList<QString> colorCb;
+    colorCb.append("Black");
+    colorCb.append("Red");
+    colorCb.append("Green");
+    colorCb.append("Blue");
+    colorCb.append("Cyan");
+    colorCb.append("Magenta");
+    colorCb.append("Dark Red");
+    colorCb.append("Dark Green");
+    colorCb.append("Dark Blue");
+    colorCb.append("Dark Magenta");
+    ui->comboBox_2->addItems(colorCb);
+    loadColor();
+
+
+
     //For List View!!
 
-    QList<QString> list = modelToItems(model);
-    ui->listWidget->clear();
-    ui->listWidget->addItems(list);
+    setList();
     ui->comboBox->setModel(model);
 
     forceExit = false;
@@ -148,9 +184,7 @@ void Tasker::on_actionImport_ics_File_triggered()
         model->append(from_task(tasks[i]));
         model->reset();
     }
-    QList<QString> list = modelToItems(model);
-    ui->listWidget->clear();
-    ui->listWidget->addItems(list);
+    setList();
     madeChanges = true;
 }
 
@@ -207,9 +241,7 @@ void Tasker::on_addTask_clicked()
         addTask.append("0");
         model->append(addTask);
         model->reset();
-        QList<QString> list = modelToItems(model);
-        ui->listWidget->clear();
-        ui->listWidget->addItems(list);
+        setList();
         madeChanges = true;
     }
 
@@ -220,10 +252,8 @@ void Tasker::on_deleteTask_clicked()
 {
     if (model->rowCount() != 0){
         model->deleteList(currentTask);
-        QList<QString> list = modelToItems(model);
-        ui->listWidget->clear();
-        ui->listWidget->addItems(list);
         model->reset();
+        setList();
         madeChanges = true;
         if (model->rowCount() == 0){
             ui->showName->clear();
@@ -301,9 +331,7 @@ void Tasker::on_submitChanges_clicked()
             model->insert(addTask, currentTask + tempcurr);
             model->reset();
             ui->comboBox->setCurrentIndex(currentTask + tempcurr);
-            QList<QString> list = modelToItems(model);
-            ui->listWidget->clear();
-            ui->listWidget->addItems(list);
+            setList();
             madeChanges = true;
         }
     }
@@ -341,10 +369,7 @@ void Tasker::updateModel(vector<task> tasks){
     }
 
     //For List View!!
-    updateColors();
-    QList<QString> list = modelToItems(model);
-    ui->listWidget->clear();
-    ui->listWidget->addItems(list);
+    setList();
     ui->comboBox->setModel(model);
 }
 
@@ -356,15 +381,16 @@ QList<QString> Tasker::modelToItems(UserModel* model){
     return list;
 }
 
+QList<QString> Tasker::modelToCourses(UserModel *model){
+    QList<QString> list;
+    for(int i=0 ; i < model->rowCount() ; i++){
+        list.append(model->getData(i, 3));
+    }
+    return list;
+}
+
 void Tasker::updateColors(){
-//    QModelIndex vIndex = model->index(0, 0);
-//    QMap<int, QVariant> vMap = model->itemData(vIndex);
-//    vMap.insert(Qt::BackgroundRole, QVariant(QBrush(Qt::red)));
-//    model->setItemData(vIndex, vMap);
 
-    //for(int i=0 ; i < model->rowCount() ; i++){
-
-    //}
 }
 
 void Tasker::on_pushButton_clicked()
@@ -464,8 +490,8 @@ void Tasker::on_actionExit_And_Save_triggered()
 
 void Tasker::on_listWidget_clicked(const QModelIndex &index)
 {
-//    QListWidgetItem* itm = ui->listWidget->itemFromIndex(index);
-//    itm->setForeground(QBrush(Qt::red));
+    /*QListWidgetItem* itm = ui->listWidget->itemFromIndex(index);
+    itm->setForeground(QBrush(Qt::blue));*/
 
     currentTask = index.row();
     ui->showName->setText(model->getData(index.row(), 0));
@@ -476,5 +502,44 @@ void Tasker::on_listWidget_clicked(const QModelIndex &index)
     ui->showDifficulty->setText(model->getData(index.row(), 5));
     bool checked = QVariant(model->getData(index.row(), 6)).toBool();
     ui->checkBox->setChecked(checked);
+}
+
+
+void Tasker::loadColor(){
+    //QMap<QString, int> colorCoordination;
+    map<string, int> holder = colors.get_colors();
+    for(map<string,int>::iterator iter = holder.begin() ; iter != holder.end() ; iter++){
+        colorCoordination[QString::fromStdString(iter->first)] = iter->second;
+    }
+}
+void Tasker::storeColor(){
+    map<string, int> holder;
+    for(QMap<QString,int>::iterator iter = colorCoordination.begin() ; iter != colorCoordination.end() ; iter++){
+        holder[(iter.key()).toStdString()] = iter.value();
+    }
+    colors.set_colors(holder);
+}
+
+
+void Tasker::on_pushButton_5_clicked()
+{
+    // Color Submit
+    int ind = ui->comboBox_2->currentIndex();
+    QString course = ui->lineEdit->text();
+    colorCoordination[course] = ind;
+    storeColor();
+    setList();
+}
+
+
+void Tasker::on_pushButton_6_clicked()
+{
+    // Clear all colors
+    QList<QString> courses = modelToCourses(model);
+    for(QString x : courses){
+        colorCoordination[x] = 0;
+    }
+    storeColor();
+    setList();
 }
 
